@@ -44,4 +44,13 @@ describe("Library Class", () => {
     library.borrowBook(user, "9780132350884");
     expect(library.viewAvailableBooks().size).toBe(0);
   });
+
+  it("should throw an error when borrowing a book that is not available", () => {
+    const user = new User("user1", Role.USER);
+    library.addUser(user);
+
+    expect(() => library.borrowBook(user, "9780132350884")).toThrowError(
+      "Book not found."
+    );
+  });
 });
