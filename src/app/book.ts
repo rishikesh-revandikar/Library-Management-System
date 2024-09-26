@@ -1,3 +1,4 @@
+// Class representing a book in the library system
 export class Book {
   isbn: string;
   title: string;
@@ -17,6 +18,7 @@ export class Book {
     this.publicationYear = publicationYear;
   }
 
+  // Private method to validate that all required attributes are present
   private validateRequiredAttributes(
     isbn: string,
     title: string,
@@ -28,6 +30,7 @@ export class Book {
     }
   }
 
+  // Public method to get the ISBN of the book
   public getISBN(): string {
     return this.isbn;
   }
