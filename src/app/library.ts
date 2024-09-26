@@ -46,5 +46,17 @@ export class Library {
     this.bookInventory.delete(isbn);
   }
 
-  
+  public returnBook(user: User, isbn: string): void {
+    if (!this.borrowedBooks.has(isbn)) {
+      throw new Error("Book was not borrowed by any user.");
+    }
+    if (this.borrowedBooks.get(isbn) !== user.userName) {
+      throw new Error("Book was not borrowed by this user");
+    }
+    this.bookInventory.set(
+      isbn,
+      this.borrowedBooks.get(isbn) as unknown as Book
+    );
+    this.borrowedBooks.delete(isbn);
+  }
 }
