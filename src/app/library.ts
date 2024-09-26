@@ -5,6 +5,7 @@ export class Library {
   private name: string;
   private userCatalog: Map<string, User>;
   private bookInventory: Map<string, Book>;
+  private borrowedBooks: Map<string, string>;
 
   constructor(name: string) {
     if (!name || name.length < 4) {
@@ -13,6 +14,7 @@ export class Library {
     this.name = name;
     this.userCatalog = new Map<string, User>();
     this.bookInventory = new Map<string, Book>();
+    this.borrowedBooks = new Map<string, string>();
   }
 
   public addUser(user: User): void {
@@ -31,5 +33,16 @@ export class Library {
 
   public viewAvailableBooks(): Map<string, Book> {
     return new Map(this.bookInventory);
+  }
+
+  public borrowBook(user: User, isbn: string): void {
+    if (!this.bookInventory.has(isbn)) {
+      throw new Error("Book not found.");
+    }
+    if (this.borrowedBooks.has(isbn)) {
+      throw new Error("Book is already borrowed.");
+    }
+    this.borrowedBooks.set(isbn, user.userName);
+    this.bookInventory.delete(isbn);
   }
 }
