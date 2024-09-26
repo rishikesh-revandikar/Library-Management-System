@@ -34,5 +34,14 @@ describe("Library Class", () => {
     );
   });
 
+  it("should allow a user to borrow a book", () => {
+    library.addUser(librarian);
+    library.addBook(librarian, book);
 
+    const user = new User("user1", Role.USER);
+    library.addUser(user);
+
+    library.borrowBook(user, "9780132350884");
+    expect(library.viewAvailableBooks().size).toBe(0);
+  });
 });
