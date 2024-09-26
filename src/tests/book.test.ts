@@ -1,4 +1,4 @@
-import { Book } from "../src/book";
+import { Book } from "../app/book";
 
 describe("Book Class", () => {
   it("should create a book with valid attributes", () => {
