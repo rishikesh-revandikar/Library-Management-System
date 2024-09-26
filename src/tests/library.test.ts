@@ -1,17 +1,13 @@
-import { Library } from "../src/library";
-import { Book } from "../src/book";
-import { User, Role } from "../src/user";
-
+import { Library } from "../app/library";
+import { User, Role } from "../app/user";
 
 describe("Library Class", () => {
   let library: Library;
   let librarian: User;
-  let book: Book;
 
   beforeEach(() => {
     library = new Library("Public Library");
     librarian = new User("librarian1", Role.LIBRARIAN);
-    book = new Book("9780132350884", "Clean Code", "Robert Cecil Martin", 2012);
   });
 
   it("should add a user to the library", () => {
@@ -20,6 +16,4 @@ describe("Library Class", () => {
       "User already exists in the catalog."
     );
   });
-
-  
 });
