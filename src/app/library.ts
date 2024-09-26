@@ -4,6 +4,7 @@ import { User, Role } from "./user";
 export class Library {
   private name: string;
   private userCatalog: Map<string, User>;
+  
 
   constructor(name: string) {
     if (!name || name.length < 4) {
@@ -11,6 +12,7 @@ export class Library {
     }
     this.name = name;
     this.userCatalog = new Map<string, User>();
+    
   }
 
   public addUser(user: User): void {
@@ -19,4 +21,6 @@ export class Library {
     }
     this.userCatalog.set(user.userName, user);
   }
+
+  
 }
