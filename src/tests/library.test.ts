@@ -25,4 +25,12 @@ describe("Library Class", () => {
     library.addBook(librarian, book);
     expect(library.viewAvailableBooks().size).toBe(1);
   });
+
+  it("should not allow a non-librarian to add a book", () => {
+    const user = new User("user1", Role.USER);
+    library.addUser(user);
+    expect(() => library.addBook(user, book)).toThrowError(
+      "User is not permitted to add books."
+    );
+  });
 });
