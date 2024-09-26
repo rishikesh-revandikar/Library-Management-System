@@ -4,7 +4,7 @@ import { User, Role } from "./user";
 export class Library {
   private name: string;
   private userCatalog: Map<string, User>;
-  
+  private bookInventory: Map<string, Book>;
 
   constructor(name: string) {
     if (!name || name.length < 4) {
@@ -12,7 +12,7 @@ export class Library {
     }
     this.name = name;
     this.userCatalog = new Map<string, User>();
-    
+    this.bookInventory = new Map<string, Book>();
   }
 
   public addUser(user: User): void {
@@ -22,5 +22,14 @@ export class Library {
     this.userCatalog.set(user.userName, user);
   }
 
-  
+  public addBook(user: User, book: Book): void {
+    if (!user.isPermittedToAddBook()) {
+      throw new Error("User is not permitted to add books.");
+    }
+    this.bookInventory.set(book.getISBN(), book);
+  }
+
+  public viewAvailableBooks(): Map<string, Book> {
+    return new Map(this.bookInventory);
+  }
 }
